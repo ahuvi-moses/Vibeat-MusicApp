@@ -1,0 +1,17 @@
+const express = require('express')
+const router = express.Router()
+const songController = require('../controllers/songController')
+const verifyJWT = require("../middleware/verifyJWT")
+router.use(verifyJWT)
+
+router.route('/')
+// .post(songController.createNewSong)
+//.get(songController.getSong)
+.post(songController.rateSong)
+.get(songController.getAllSongs)
+router.post('/genres',songController.getSongByGenre)
+router.get('/newSongs',songController.getLatestSongs)
+router.get('/albumSongs/:id',songController.getSongsByAlbumId)
+router.get('/artistSongs/:id',songController.getSongsByArtistId)
+router.get('/:id', songController.getSongById)
+module.exports = router
